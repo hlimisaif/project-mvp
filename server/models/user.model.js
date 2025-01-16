@@ -1,14 +1,14 @@
 module.exports = (connection, DataTypes) => {
-    const user = connection.define(
-      "user",
+    const User = connection.define(
+      "User",
       
         {
           // Model attributes are defined here
-          Name: {
+          email: {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          LastName:{
+          password:{
             type:DataTypes.STRING,
             allowNull:false
           }
@@ -16,6 +16,6 @@ module.exports = (connection, DataTypes) => {
         // Other model options go here
       }
     );
-    return user;
+    return User;
   };
   

@@ -1,5 +1,6 @@
 const {Shoes}=require("../models/index")
-
+const { search } = require("../routers/shoes.router")
+const {Op}=require ("sequelize")
 module.exports = {
   getAllShoess: async (req, res) => {
     try{
@@ -23,8 +24,6 @@ module.exports = {
     
     
   },
-
-
 
   addShoes: async (req, res) => {
     const {Name,ImageUrl,price,describtion,CategoryId}=req.body
@@ -100,6 +99,32 @@ module.exports = {
       // throw error;
       res.status(500).send(error);
     }
-  }
+  },
+  
+  searchShoes: (req, res) => {
+    const { query } = req.params; 
+    if (!query) {
+      return res.status(400).json({ message: 'Query parameter is required.' });
+    }
+    
+    Shoes.findAll({
+      where: {
+        Name: {
+          [Op.like]: `${query}%`, 
+        },
+      },
+    })
+      .then((shoes) => { 
+        if (shoes.length === 0) {
+          return res.status(404).json({ message: 'No Shoes found' });
+        }
+  
+        res.status(200).json(shoes);
+      })
+      .catch((error) => {
+        res.status(500).json({ message: 'Error searching for Shoes', error });
+      });
+  },
+
   }
   
