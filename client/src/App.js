@@ -199,7 +199,7 @@ const hundelSearch=async(e,query)=>{
 <div>
 <Category  handleCatChange={handleCatChange} category={category}/>
   {view==="main"?(<ShoesDetaille getCurrentshoesAndChnageView={getCurrentshoesAndChnageView} handleDelete ={handleDelete}shose={shose}/>
-):view==="addShoes"?( <Addshoes handleAddshoes={handleAddshoes} fetchshoes={fetchshoes}/>
+):view==="addShoes"?( <Addshoes category={category} handleAddshoes={handleAddshoes} fetchshoes={fetchshoes}/>
   ):(<Update handleUpdateShoes={handleUpdateShoes}currentShoes={currentShoes}/>)}
  
 {/* </div>

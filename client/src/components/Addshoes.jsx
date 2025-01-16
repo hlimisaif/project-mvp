@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Addshoes({handleAddshoes,fetchshoes}) {
+function Addshoes({handleAddshoes,category}) {
     const[Name,setName]=useState("")
     const[ImageUrl,setImageUrl]=useState("")
     const[price,setPrice]=useState(0)
@@ -66,14 +66,12 @@ function Addshoes({handleAddshoes,fetchshoes}) {
         <label htmlFor="exampleFormControlInput1" className="form-label">
         CategoryId
         </label>
-        <input
-          className="form-control form-control-lg"
-          onChange={(e) => setCategoryId(e.target.value)}
-          type="text"
-          name="CategoryId"
-          placeholder="CategoryId"
-          aria-label=".form-control-lg example"
-        />
+        <select onChange={(e)=>setCategoryId(e.target.value)} className="form-select"  >
+  <option value ="all">select category</option>
+  {category.map((el,i) => (
+  <option key ={i} value={el.id}>{el.NameCategory}</option>
+))}
+</select>
       </div>
       <button
             onClick={() => handleAddshoes({ Name,ImageUrl,price, description,CategoryId })}
